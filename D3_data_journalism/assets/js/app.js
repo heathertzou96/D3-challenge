@@ -89,15 +89,17 @@ d3.csv("assets/data/data.csv").then(function(data_journalism) {
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left + 40)
-      .attr("x", 0 - (height / 2))
+      .attr("x", 0 - (height / 2 + 60))
       .attr("dy", "1em")
       .attr("class", "axisText")
-      .text("Lacks Healthcare(%)");
+      .text("Lacks Healthcare (%)")
+      .attr("font-weight", "bold");
     
     chartGroup.append("text")
-    .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+    .attr("transform", `translate(${width / 3 + 80}, ${height + margin.top + 30})`)
     .attr("class", "axisText")
-    .text("In Poverty(%)");
+    .text("In Poverty (%)")
+    .attr("font-weight", "bold");
 
 }).catch(function(error) {
     console.log(error);
