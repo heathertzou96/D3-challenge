@@ -28,7 +28,7 @@ var chartGroup = svg.append("g")
 d3.csv("assets/data/data.csv").then(function(data_journalism) {
 
     console.log(data_journalism);
-
+    
     //parse data/cast as numbers
     data_journalism.forEach(function(data) {
         data.poverty = +data.poverty;
@@ -41,7 +41,7 @@ d3.csv("assets/data/data.csv").then(function(data_journalism) {
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
-    .domain([0, d3.max(data_journalism, d => d.healthcare)])
+    .domain([4, d3.max(data_journalism, d => d.healthcare)])
     .range([height, 0]);
 
     //create axis functions
@@ -57,54 +57,87 @@ d3.csv("assets/data/data.csv").then(function(data_journalism) {
       .call(leftAxis);
 
     //create circles
-    var circlesGroup = chartGroup.selectAll("circle")
-    .data(data_journalism)
-    .enter()
-    .append("circle")
-    .attr("cx", d => xLinearScale(d.poverty))
-    .attr("cy", d => yLinearScale(d.healthcare))
-    .attr("r", "12")
-    .attr("stroke", "white")
-    .attr("fill", "#0093bb")
-    .attr("opacity", ".9")
-    
-    circlesGroup.append("text");
+    var circles = chartGroup.selectAll("circle")
 
-    circlesGroup.selectAll("text")
+    circles = circles.data(data_journalism)
+        .enter()
+        .append("g")
+
+    circles.append("circle")
+
+    circles.selectAll("circle")
+        .attr("cx", d => xLinearScale(d.poverty))
+        .attr("cy", d => yLinearScale(d.healthcare))
+        .attr("r", "12")
+        .attr("stroke", "white")
+        .attr("fill", "#0093bb")
+        .attr("opacity", ".9")
+    
+    circles.append("text");
+
+    circles.selectAll("text")
         .text(d => d.abbr)
         .attr("x", d => xLinearScale(d.poverty))
         .attr("y", d => yLinearScale(d.healthcare))
         .attr("fill", "black")
-        .attr("font-size", "3px")
+        .attr("font-size", "6")
         .attr("text-anchor",  "middle")
+        .attr("alignment-baseline", "middle")
+
+
+
+    // .data(data_journalism)
+    // .enter()
+    // .append("g")//
+    // .append("circle")
+    // .attr("cx", d => xLinearScale(d.poverty))
+    // .attr("cy", d => yLinearScale(d.healthcare))
+    // .attr("r", "12")
+    // .attr("stroke", "white")
+    // .attr("fill", "#0093bb")
+    // .attr("opacity", ".9")
+
+
+
+    // .append("text").selectAll("text") //
+    // .text(d => d.abbr)//
+    // .attr("x", d => xLinearScale(d.poverty)) // 
+    // .attr("y", d => yLinearScale(d.healthcare)) //
+    // .attr("text-anchor",  "middle")//
+    // .attr("alignment-baseline", "middle")//
+
+    //~~~~~
+	  
+    // circlesGroup.append("text");
+
+    // circlesGroup.selectAll("text")
+    //     .attr("x", d => xLinearScale(d.poverty))
+    //     .attr("y", d => yLinearScale(d.healthcare))
+    //     .text(d => d.abbr)
+    //     .attr("text-anchor",  "middle")
+    //     .attr("fill", "black")
+    //     .attr("font-size", "6")
+        
     
     //~~~
     // var abbr = chartGroup.selectAll("text")
     // .data(data_journalism)
     // .enter()
     // .append("text")
-
-    // var abbr_text = text
-    // .text(d => d.abbr)
+    
+    // var abbr_text = abbr
     // .attr("x", d => xLinearScale(d.poverty))
     // .attr("y", d => yLinearScale(d.healthcare))
-    // //.text(d => d.abbr)
-    // .attr("fill", "black")
-    // .attr("font-size", "3px")
+    // .text(d => d.abbr)
     // .attr("text-anchor",  "middle")
+    // .attr("fill", "black")
+    // .attr("font-size", "6");
 
-    //~~~
-
-    //add state abbr to each circle
-    // circlesGroup.append("text")
-    //   .attr("dx", d => xLinearScale(d.poverty))
-    //   .attr("dy", d => yLinearScale(d.healthcare))
-    //   .attr("text-anchor", "middle")
-    //   .attr("alignment-baseline", "middle")
-    //   .style('font-size', 5)
-    //   .style("fill", "black")
-    //   .text(d => d.abbr)
+    // console.log(abbr_text);
     
+
+
+
     //create axes labels
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
