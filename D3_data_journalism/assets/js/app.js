@@ -56,7 +56,8 @@ d3.csv("assets/data/data.csv").then(function(data_journalism) {
     chartGroup.append("g")
       .call(leftAxis);
 
-    //create circles
+    //create circles and text - we will do this by grouping them together
+    //reference: https://stackoverflow.com/questions/26955267/adding-text-to-a-circle-in-d3
     var circles = chartGroup.selectAll("circle")
 
     circles = circles.data(data_journalism)
@@ -80,63 +81,9 @@ d3.csv("assets/data/data.csv").then(function(data_journalism) {
         .attr("x", d => xLinearScale(d.poverty))
         .attr("y", d => yLinearScale(d.healthcare))
         .attr("fill", "black")
-        .attr("font-size", "6")
+        .attr("font-size", "8")
         .attr("text-anchor",  "middle")
         .attr("alignment-baseline", "middle")
-
-
-
-    // .data(data_journalism)
-    // .enter()
-    // .append("g")//
-    // .append("circle")
-    // .attr("cx", d => xLinearScale(d.poverty))
-    // .attr("cy", d => yLinearScale(d.healthcare))
-    // .attr("r", "12")
-    // .attr("stroke", "white")
-    // .attr("fill", "#0093bb")
-    // .attr("opacity", ".9")
-
-
-
-    // .append("text").selectAll("text") //
-    // .text(d => d.abbr)//
-    // .attr("x", d => xLinearScale(d.poverty)) // 
-    // .attr("y", d => yLinearScale(d.healthcare)) //
-    // .attr("text-anchor",  "middle")//
-    // .attr("alignment-baseline", "middle")//
-
-    //~~~~~
-	  
-    // circlesGroup.append("text");
-
-    // circlesGroup.selectAll("text")
-    //     .attr("x", d => xLinearScale(d.poverty))
-    //     .attr("y", d => yLinearScale(d.healthcare))
-    //     .text(d => d.abbr)
-    //     .attr("text-anchor",  "middle")
-    //     .attr("fill", "black")
-    //     .attr("font-size", "6")
-        
-    
-    //~~~
-    // var abbr = chartGroup.selectAll("text")
-    // .data(data_journalism)
-    // .enter()
-    // .append("text")
-    
-    // var abbr_text = abbr
-    // .attr("x", d => xLinearScale(d.poverty))
-    // .attr("y", d => yLinearScale(d.healthcare))
-    // .text(d => d.abbr)
-    // .attr("text-anchor",  "middle")
-    // .attr("fill", "black")
-    // .attr("font-size", "6");
-
-    // console.log(abbr_text);
-    
-
-
 
     //create axes labels
     chartGroup.append("text")
